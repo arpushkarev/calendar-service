@@ -1,0 +1,19 @@
+{
+  "db": {
+    "dsn": "user=calendar-service-user dbname=calendar-service password={password} host=localhost port=54322 sslmode=disable",
+    "max_open_connections": 10
+  },
+
+  "http": {
+    "host": "localhost",
+    "port": "8090"
+  },
+
+  "logger": {
+    "level": "error"
+  },
+
+  "repos": {
+    "data_source": "memory"
+  }
+}
