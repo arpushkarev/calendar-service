@@ -1,4 +1,4 @@
-package calendarMemo
+package calendar
 
 import (
 	"context"
@@ -7,7 +7,7 @@ import (
 )
 
 func (s *Service) Create(ctx context.Context, eventInfo *model.EventInfo) (int64, error) {
-	id, err := s.info.Create(ctx, eventInfo)
+	id, err := s.eventRepository.Create(ctx, eventInfo)
 	if err != nil {
 		return 0, err
 	}

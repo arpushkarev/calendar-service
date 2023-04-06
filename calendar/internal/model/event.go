@@ -4,7 +4,7 @@ import "time"
 
 type EventInfo struct {
 	Title        string    `db:"title"`
-	Date         time.Time `db:"date"`
+	Date         time.Time `db:"date_event"`
 	Duration     time.Time `db:"duration"`
 	Description  string    `db:"description"`
 	AuthorID     int64     `db:"author_ID"`

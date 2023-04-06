@@ -1,26 +1,41 @@
 package logger
 
 import (
-	"log"
 	"os"
+
+	"github.com/arpushkarev/calendar-service/calendar/internal/config"
+	"github.com/rs/zerolog"
 )
 
-var (
-	Info  *log.Logger
-	Warn  *log.Logger
-	Error *log.Logger
-	Debug *log.Logger
-)
+type Logger struct {
+	Logger *zerolog.Logger
+	Level  string
+}
 
-func init() {
+func NewLogger(config *config.LoggerConfig) (*Logger, error) {
 	file, err := os.OpenFile("calendar.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err != nil {
-		log.Fatalf("Log file creation failure: %s", err.Error()) // log level: warning
+		return nil, err
 	}
 	defer file.Close()
 
-	Info = log.New(file, "Info", log.Ldate|log.Ltime|log.Llongfile)
-	Warn = log.New(file, "Warn", log.Ldate|log.Ltime|log.Llongfile)
-	Error = log.New(file, "Error", log.Ldate|log.Ltime|log.Llongfile)
-	Debug = log.New(file, "Debug", log.Ldate|log.Ltime|log.Llongfile)
+	return &Logger{
+		Logger: config.LoggerConfig,
+	}, nil
+}
+
+func (l *Logger) Info(message string, a ...any) {
+	l.Logger.Info().Msg(message)
+}
+
+func (l *Logger) Warn(message string) {
+	l.Logger.Warn().Msg(message)
+}
+
+func (l *Logger) Debug(message string) {
+	l.Logger.Debug().Msg(message)
+}
+
+func (l *Logger) Error(message string) {
+	l.Logger.Error().Msg(message)
 }

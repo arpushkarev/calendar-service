@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 
+	"github.com/arpushkarev/calendar-service/calendar/internal/app"
 	"github.com/arpushkarev/calendar-service/calendar/internal/logger"
 )
 
@@ -20,7 +21,7 @@ func main() {
 
 	a, err := app.NewApp(ctx, pathConfig)
 	if err != nil {
-		logger.Error.Fatalf("New app creation failure: %s", err.Error())
+		logger.Logger.Info("New app creation failure:", err.Error())
 	}
 
 	err = a.Run()
